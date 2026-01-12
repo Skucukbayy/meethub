@@ -8,13 +8,28 @@ const app = express();
 const httpServer = createServer(app);
 
 // CORS configuration
-const allowedOrigins = process.env.CLIENT_URL
-    ? [process.env.CLIENT_URL, 'http://localhost:3000']
-    : ['http://localhost:3000'];
+const normalizeUrl = (url) => url ? url.replace(/\/+$/, '') : '';
+const clientUrl = normalizeUrl(process.env.CLIENT_URL);
+const allowedOrigins = [
+    clientUrl,
+    'https://meethub-sigma.vercel.app',
+    'http://localhost:3000'
+].filter(Boolean);
 
 // Middleware
 app.use(cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+
+        const normalizedOrigin = normalizeUrl(origin);
+        if (allowedOrigins.includes(normalizedOrigin)) {
+            callback(null, true);
+        } else {
+            console.log('CORS blocked origin:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 app.use(express.json());

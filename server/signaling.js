@@ -6,13 +6,25 @@ const database = require('./db');
 const activeRooms = new Map();
 
 function initializeSignaling(httpServer) {
-    const allowedOrigins = process.env.CLIENT_URL
-        ? [process.env.CLIENT_URL, 'http://localhost:3000']
-        : ['http://localhost:3000'];
+    const normalizeUrl = (url) => url ? url.replace(/\/+$/, '') : '';
+    const clientUrl = normalizeUrl(process.env.CLIENT_URL);
+    const allowedOrigins = [
+        clientUrl,
+        'https://meethub-sigma.vercel.app',
+        'http://localhost:3000'
+    ].filter(Boolean);
 
     const io = new Server(httpServer, {
         cors: {
-            origin: allowedOrigins,
+            origin: (origin, callback) => {
+                if (!origin) return callback(null, true);
+                const normalizedOrigin = normalizeUrl(origin);
+                if (allowedOrigins.includes(normalizedOrigin)) {
+                    callback(null, true);
+                } else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
             methods: ['GET', 'POST'],
             credentials: true
         },
