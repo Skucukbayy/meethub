@@ -1,65 +1,95 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="page">
+      <header className="header">
+        <div className="container">
+          <div className="header-content">
+            <div className="logo">MeetHub</div>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <Link href="/login" className="btn btn-secondary">
+                Giriş Yap
+              </Link>
+              <Link href="/register" className="btn btn-primary">
+                Kayıt Ol
+              </Link>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="container">
+        <section className="hero">
+          <h1 className="hero-title fade-in">
+            Modern Video Konferans Platformu
+          </h1>
+          <p className="hero-subtitle fade-in">
+            Ekibinizle kolayca bağlanın. Ses, video ve ekran paylaşımı ile
+            profesyonel toplantılar yapın.
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="hero-actions fade-in">
+            <Link href="/register" className="btn btn-primary">
+              Ücretsiz Başla
+            </Link>
+            <Link href="/login" className="btn btn-secondary">
+              Toplantıya Katıl
+            </Link>
+          </div>
+        </section>
+
+        <section className="features">
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">🎥</div>
+            <h3 className="feature-title">HD Video & Ses</h3>
+            <p className="feature-description">
+              Kristal netliğinde görüntü ve ses kalitesi ile profesyonel
+              toplantılar yapın.
+            </p>
+          </div>
+
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">🖥️</div>
+            <h3 className="feature-title">Ekran Paylaşımı</h3>
+            <p className="feature-description">
+              Sunumlarınızı ve ekranınızı kolayca paylaşın, birlikte çalışın.
+            </p>
+          </div>
+
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">👥</div>
+            <h3 className="feature-title">20 Kişiye Kadar</h3>
+            <p className="feature-description">
+              Her odada 20 kişiye kadar katılımcı ile büyük toplantılar yapın.
+            </p>
+          </div>
+
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">🔗</div>
+            <h3 className="feature-title">Kolay Paylaşım</h3>
+            <p className="feature-description">
+              Toplantı linkini paylaşın, katılımcılar tek tıkla katılsın.
+            </p>
+          </div>
+
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">🔒</div>
+            <h3 className="feature-title">Güvenli</h3>
+            <p className="feature-description">
+              End-to-end şifreleme ile güvenli ve özel toplantılar.
+            </p>
+          </div>
+
+          <div className="card card-glass feature-card fade-in">
+            <div className="feature-icon">⚡</div>
+            <h3 className="feature-title">Hızlı & Stabil</h3>
+            <p className="feature-description">
+              WebRTC teknolojisi ile düşük gecikme ve yüksek performans.
+            </p>
+          </div>
+        </section>
       </main>
     </div>
   );
